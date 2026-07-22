@@ -1,0 +1,84 @@
+/* ============================================================
+   BUTIÁ DESIGN SYSTEM — SHARED COMPONENT STYLES
+
+   Class-based pieces of the admin look that are plain CSS.
+   React components stay in the apps for now (phase 2). */
+
+/* Segmented control — flat white pill bar on the page grey. */
+.seg {
+  background: var(--card);
+  padding: 2px;
+  border-radius: 8px;
+  display: inline-flex;
+  gap: 2px;
+}
+.seg button,
+.seg > span {
+  padding: 3px 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  color: var(--muted-foreground);
+  font-weight: 500;
+  display: inline-block;
+  cursor: pointer;
+}
+.seg button[data-active="true"],
+.seg > span[data-active="true"] {
+  background: var(--card);
+  color: var(--foreground);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Multi-select variant: dark --primary active pill. Buttons and links
+   share the style so tab-like <a> rows work too. */
+.seg-timeline {
+  background: var(--card);
+  padding: 2px;
+  border-radius: 8px;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+.seg-timeline button,
+.seg-timeline a {
+  padding: 3px 10px;
+  font-size: 12.5px;
+  border-radius: 6px;
+  color: var(--muted-foreground);
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
+  line-height: 1;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+.seg-timeline button:hover,
+.seg-timeline a:hover {
+  background: var(--accent);
+  color: var(--foreground);
+}
+.seg-timeline button[data-active="true"],
+.seg-timeline a[data-active="true"] {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Inside a white popover a white bar would vanish — use the page grey
+   so the chip group still reads as a unit. */
+[data-slot="popover-content"] .seg,
+[data-slot="popover-content"] .seg-timeline {
+  background: var(--muted);
+}
+
+/* Keyboard hint badge */
+.kbd {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+  background: var(--card);
+}

@@ -1,0 +1,233 @@
+/* ============================================================
+   BUTIÁ DESIGN SYSTEM — TOKENS
+   ============================================================
+
+   Single source of truth for the palettes used by butia-dashboard
+   and ledger. Two palettes, four blocks:
+
+   - :root / .dark ............ warm earth tones (Butiá brand — the
+     customer-facing surfaces: /proposta, /portal/*, /p/:code)
+   - :root.admin / :root.admin.dark ... neutral grey (hue 220) — the
+     admin tool look. Scoped to html.admin: butia-dashboard's Shell
+     adds the class on admin routes; ledger sets it permanently.
+
+   Semantic tokens (success/warning/destructive and the ledger's
+   income/expense/transfer/warn/danger) encode meaning, not mood —
+   the admin blocks only neutralise the greys and let semantics
+   inherit, overriding just the ones tied to foreground.
+
+   Values here MUST stay in lockstep with what shipped — treat any
+   change as a design change for BOTH apps, and release it as a new
+   version tag. */
+
+:root {
+  --radius: 0.5rem;
+
+  /* Core palette — warm earth tones */
+  --background: hsl(40 20% 98%);
+  --foreground: hsl(30 10% 15%);
+
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(30 10% 15%);
+
+  --popover: hsl(40 20% 98%);
+  --popover-foreground: hsl(30 10% 15%);
+
+  --primary: hsl(30 10% 15%);
+  --primary-foreground: hsl(40 20% 98%);
+
+  --secondary: hsl(40 12% 92%);
+  --secondary-foreground: hsl(30 10% 25%);
+
+  --muted: hsl(40 10% 93%);
+  --muted-foreground: hsl(30 6% 28%);
+
+  --accent: hsl(40 12% 92%);
+  --accent-foreground: hsl(30 10% 15%);
+
+  --destructive: hsl(15 40% 55%);
+  --destructive-foreground: hsl(40 20% 98%);
+
+  /* Semantic status tokens */
+  --success: hsl(145 20% 40%);
+  --success-foreground: hsl(40 20% 98%);
+  --warning: hsl(38 55% 48%);
+  --warning-foreground: hsl(30 10% 15%);
+
+  --border: hsl(35 10% 88%);
+  --border-soft: hsl(35 10% 92%);
+  --input: hsl(35 10% 88%);
+  --ring: hsl(30 10% 40%);
+
+  /* Ledger semantics (money direction) */
+  --income: hsl(145 20% 40%);
+  --expense: hsl(30 10% 15%);
+  --transfer: hsl(30 6% 55%);
+  --warn: hsl(38 55% 48%);
+  --danger: hsl(15 40% 55%);
+
+  /* Shadows */
+  --shadow-elegant: 0 10px 30px -10px hsl(30 10% 15% / 0.08);
+  --shadow-glow: 0 0 40px hsl(30 10% 15% / 0.04);
+
+  /* Charts — muted earth tones */
+  --chart-1: hsl(145 20% 45%);
+  --chart-2: hsl(30 15% 55%);
+  --chart-3: hsl(200 12% 50%);
+  --chart-4: hsl(15 40% 55%);
+  --chart-5: hsl(35 8% 65%);
+
+  /* Sidebar — light */
+  --sidebar: hsl(40 20% 98%);
+  --sidebar-foreground: hsl(30 8% 35%);
+  --sidebar-primary: hsl(30 10% 15%);
+  --sidebar-primary-foreground: hsl(40 20% 98%);
+  --sidebar-accent: hsl(38 12% 90%);
+  --sidebar-accent-foreground: hsl(30 10% 15%);
+  --sidebar-border: transparent;
+  --sidebar-ring: hsl(30 10% 40%);
+}
+
+/* Dark mode — warm dark tones */
+.dark {
+  --background: hsl(30 8% 8%);
+  --foreground: hsl(35 10% 88%);
+
+  --card: hsl(30 8% 11%);
+  --card-foreground: hsl(35 10% 88%);
+
+  --popover: hsl(30 8% 8%);
+  --popover-foreground: hsl(35 10% 88%);
+
+  --primary: hsl(35 10% 88%);
+  --primary-foreground: hsl(30 8% 8%);
+
+  --secondary: hsl(30 8% 16%);
+  --secondary-foreground: hsl(35 10% 88%);
+
+  --muted: hsl(30 6% 16%);
+  --muted-foreground: hsl(30 6% 55%);
+
+  --accent: hsl(30 8% 16%);
+  --accent-foreground: hsl(35 10% 88%);
+
+  --destructive: hsl(15 35% 40%);
+  --destructive-foreground: hsl(35 10% 88%);
+
+  --success: hsl(145 18% 45%);
+  --success-foreground: hsl(40 20% 98%);
+  --warning: hsl(38 45% 52%);
+  --warning-foreground: hsl(30 8% 8%);
+
+  --border: hsl(30 6% 18%);
+  --border-soft: hsl(30 6% 15%);
+  --input: hsl(30 8% 8%);
+  --ring: hsl(35 10% 60%);
+
+  --income: hsl(145 18% 50%);
+  --expense: hsl(35 10% 88%);
+  --transfer: hsl(30 6% 55%);
+  --warn: hsl(38 45% 52%);
+  --danger: hsl(15 35% 50%);
+
+  --chart-1: hsl(145 18% 50%);
+  --chart-2: hsl(30 12% 50%);
+  --chart-3: hsl(200 10% 55%);
+  --chart-4: hsl(15 35% 50%);
+  --chart-5: hsl(35 6% 50%);
+
+  --sidebar: hsl(30 8% 8%);
+  --sidebar-foreground: hsl(30 6% 65%);
+  --sidebar-primary: hsl(35 10% 88%);
+  --sidebar-primary-foreground: hsl(30 8% 8%);
+  --sidebar-accent: hsl(30 8% 14%);
+  --sidebar-accent-foreground: hsl(35 10% 88%);
+  --sidebar-border: transparent;
+  --sidebar-ring: hsl(35 10% 60%);
+}
+
+/* ============================================================
+   ADMIN PALETTE — NEUTRAL GREY (hue 220)
+   Scoped to html.admin so Radix/Base-UI portals inherit it too. */
+
+:root.admin {
+  --background: hsl(220 14% 96%);
+  --foreground: hsl(220 12% 16%);
+
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(220 12% 16%);
+
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(220 12% 16%);
+
+  --primary: hsl(220 14% 14%);
+  --primary-foreground: hsl(0 0% 100%);
+
+  --secondary: hsl(220 12% 94%);
+  --secondary-foreground: hsl(220 12% 24%);
+
+  --muted: hsl(220 14% 96%);
+  --muted-foreground: hsl(220 8% 42%);
+
+  --accent: hsl(220 12% 94%);
+  --accent-foreground: hsl(220 12% 16%);
+
+  --border: hsl(220 11% 88%);
+  --border-soft: hsl(220 12% 92%);
+  --input: hsl(220 11% 88%);
+  --ring: hsl(220 8% 45%);
+
+  /* Foreground-tied semantics re-anchored to the neutral grey */
+  --expense: hsl(220 12% 16%);
+  --transfer: hsl(220 8% 55%);
+
+  --sidebar: hsl(220 14% 96%);
+  --sidebar-foreground: hsl(220 8% 38%);
+  --sidebar-primary: hsl(220 14% 14%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(220 12% 92%);
+  --sidebar-accent-foreground: hsl(220 12% 16%);
+  --sidebar-border: transparent;
+  --sidebar-ring: hsl(220 8% 45%);
+}
+
+/* Doubled class so this outranks both `.dark` and `:root.admin`. */
+:root.admin.dark {
+  --background: hsl(220 10% 10%);
+  --foreground: hsl(220 12% 88%);
+
+  --card: hsl(220 10% 14%);
+  --card-foreground: hsl(220 12% 88%);
+
+  --popover: hsl(220 10% 14%);
+  --popover-foreground: hsl(220 12% 88%);
+
+  --primary: hsl(220 12% 88%);
+  --primary-foreground: hsl(220 10% 10%);
+
+  --secondary: hsl(220 10% 18%);
+  --secondary-foreground: hsl(220 12% 88%);
+
+  --muted: hsl(220 10% 17%);
+  --muted-foreground: hsl(220 8% 55%);
+
+  --accent: hsl(220 10% 20%);
+  --accent-foreground: hsl(220 12% 88%);
+
+  --border: hsl(220 8% 24%);
+  --border-soft: hsl(220 9% 20%);
+  --input: hsl(220 8% 24%);
+  --ring: hsl(220 8% 55%);
+
+  --expense: hsl(220 12% 88%);
+  --transfer: hsl(220 8% 55%);
+
+  --sidebar: hsl(220 10% 10%);
+  --sidebar-foreground: hsl(220 8% 62%);
+  --sidebar-primary: hsl(220 12% 88%);
+  --sidebar-primary-foreground: hsl(220 10% 10%);
+  --sidebar-accent: hsl(220 10% 20%);
+  --sidebar-accent-foreground: hsl(220 12% 88%);
+  --sidebar-border: transparent;
+  --sidebar-ring: hsl(220 8% 55%);
+}

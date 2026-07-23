@@ -103,8 +103,15 @@
 .card-cta-body {
   width: 80%;
 }
-/* CTA line — underlined "call" at the bottom of the card. */
+/* CTA line — underlined "call" at the bottom of the card. Underline is
+   always on; the colour is quiet (muted, inherited from .page-subtitle)
+   at rest and lifts to --foreground when the card is hovered, so the
+   call "lights up" together with the border. */
 .card-cta-link {
   text-decoration: underline;
   text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+.card-cta:hover .card-cta-link {
+  color: var(--foreground);
 }

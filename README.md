@@ -19,6 +19,9 @@ The public site (obutia.com) does **not** use this package.
     shadows, `--radius`.
 - `components.css` — class-based pieces of the admin look:
   `.seg`, `.seg-timeline` segmented controls, `.kbd`.
+- `typography.css` — the shared type scale (class-based, framework
+  neutral). Being defined incrementally, titles first: `.page-title`
+  is the H1 at the top of every admin page (Inter 48 / 600 / -0.03em).
 
 ## Usage
 
@@ -32,6 +35,7 @@ The public site (obutia.com) does **not** use this package.
 /* at the top of your app's global stylesheet */
 @import "@butia/ui/tokens.css";
 @import "@butia/ui/components.css";
+@import "@butia/ui/typography.css";
 ```
 
 Each app keeps its own `@theme inline` block mapping the CSS variables

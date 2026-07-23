@@ -1,6 +1,6 @@
 {
   "name": "@butia/ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Butiá design system — shared tokens and component styles for butia-dashboard and ledger",
   "license": "MIT",
   "repository": {
@@ -9,10 +9,12 @@
   },
   "exports": {
     "./tokens.css": "./tokens.css",
-    "./components.css": "./components.css"
+    "./components.css": "./components.css",
+    "./typography.css": "./typography.css"
   },
   "files": [
     "tokens.css",
-    "components.css"
+    "components.css",
+    "typography.css"
   ]
 }

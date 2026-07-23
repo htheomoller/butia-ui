@@ -1,0 +1,26 @@
+/* ============================================================
+   BUTIÁ DESIGN SYSTEM — TYPOGRAPHY
+   ============================================================
+
+   Shared type scale for butia-dashboard and ledger. Class-based,
+   framework-neutral: both apps consume these classes directly, so a
+   change here is a change in both apps (edit → tag → bump, same flow
+   as tokens.css).
+
+   Font families come from each app's own @theme wiring (--font-sans =
+   Inter); the classes below spell out family explicitly so they render
+   identically regardless of the surrounding element's base styles
+   (a dashboard <h1> and a ledger <h1> have different base rules).
+
+   Scale is being defined incrementally — titles first. */
+
+/* Page title — the H1 at the top of every admin page.
+   Inter 48 / 600, tight editorial tracking. */
+.page-title {
+  font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0;
+}

@@ -18,9 +18,11 @@ The public site (obutia.com) does **not** use this package.
     `--income/--expense/--transfer/--warn/--danger`), charts, sidebar,
     shadows, `--radius`.
 - `components.css` — class-based pieces of the admin look:
-  `.seg`, `.seg-timeline` segmented controls, `.kbd`, and `.card-cta`
+  `.seg`, `.seg-timeline` segmented controls, `.kbd`, `.card-cta`
   (clickable "card com chamada": 80%-width copy column + underlined CTA
-  line; the whole card is the click target).
+  line; the whole card is the click target), and `.split-pane` (one
+  white frame split into columns by a hairline — list/table left,
+  editor/detail right; set the split with a grid utility on the element).
 - `typography.css` — the shared type scale (class-based, framework
   neutral). Being defined incrementally:
   - `.page-title` — H1 at the top of every admin page (Inter 48 / 600 / -0.03em).

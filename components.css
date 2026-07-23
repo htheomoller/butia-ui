@@ -115,3 +115,19 @@
 .card-cta:hover .card-cta-link {
   color: var(--foreground);
 }
+
+/* Split pane — one white frame divided into columns by a hairline rule.
+   The "list/table on the left, editor/detail on the right" layout, all
+   inside a single card. Set the column split with a grid utility on the
+   element (e.g. grid-cols-2); the divider is drawn between direct
+   children automatically. */
+.split-pane {
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+  border-radius: 8px;
+  overflow: hidden;
+  display: grid;
+}
+.split-pane > * + * {
+  border-left: 1px solid var(--border-soft);
+}

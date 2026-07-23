@@ -12,7 +12,15 @@
    identically regardless of the surrounding element's base styles
    (a dashboard <h1> and a ledger <h1> have different base rules).
 
-   Scale is being defined incrementally — titles first. */
+   Scale is being defined incrementally — titles first.
+
+   These classes set TYPE only (family, size, weight, line-height,
+   tracking, and — for the subtitle — colour). They deliberately set NO
+   margin: spacing is the job of layout utilities (mt-*, space-y-*).
+   A `margin: 0` here would be unlayered and so would beat Tailwind's
+   layered utilities, silently killing every margin utility on the
+   element — do not add it back. Tailwind's preflight already zeroes
+   default element margins. */
 
 /* Page title — the H1 at the top of every admin page.
    Inter 48 / 600, tight editorial tracking. */
@@ -22,5 +30,27 @@
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.03em;
-  margin: 0;
+}
+
+/* Card / section title — the heading inside a card or a section block
+   (one step below the page title). Inter 24 / 600. */
+.card-title {
+  font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* Page subtitle — the muted supporting line under a page title, and the
+   workhorse for descriptive / caption text at the same 14px size. Color
+   is part of its identity (it is always the quiet, secondary voice), so
+   unlike the titles above it bakes in --muted-foreground. */
+.page-subtitle {
+  font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: var(--muted-foreground);
 }

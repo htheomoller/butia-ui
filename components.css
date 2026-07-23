@@ -82,3 +82,29 @@
   color: var(--muted-foreground);
   background: var(--card);
 }
+
+/* Card with a call-to-action ("card com chamada"). A clickable card whose
+   copy sits in a narrow left column (free space on the right) and ends in
+   an underlined CTA line. The whole card is the single click target — the
+   underline is a visual affordance, not a nested link. Pair with the
+   .card-title / .page-subtitle type tokens for the text inside. */
+.card-cta {
+  display: block;
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+  border-radius: 8px;
+  padding: 20px;
+  transition: border-color 0.15s ease;
+}
+.card-cta:hover {
+  border-color: var(--border);
+}
+/* Copy column — 80% of the card width, leaving the right side open. */
+.card-cta-body {
+  width: 80%;
+}
+/* CTA line — underlined "call" at the bottom of the card. */
+.card-cta-link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

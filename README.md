@@ -18,10 +18,15 @@ The public site (obutia.com) does **not** use this package.
     `--income/--expense/--transfer/--warn/--danger`), charts, sidebar,
     shadows, `--radius`.
 - `components.css` — class-based pieces of the admin look:
-  `.seg`, `.seg-timeline` segmented controls, `.kbd`.
+  `.seg`, `.seg-timeline` segmented controls, `.kbd`, and `.card-cta`
+  (clickable "card com chamada": 80%-width copy column + underlined CTA
+  line; the whole card is the click target).
 - `typography.css` — the shared type scale (class-based, framework
-  neutral). Being defined incrementally, titles first: `.page-title`
-  is the H1 at the top of every admin page (Inter 48 / 600 / -0.03em).
+  neutral). Being defined incrementally:
+  - `.page-title` — H1 at the top of every admin page (Inter 48 / 600 / -0.03em).
+  - `.card-title` — heading inside a card or section (Inter 24 / 600 / -0.01em).
+  - `.page-subtitle` — muted 14px supporting / caption text (the quiet
+    secondary voice; bakes in --muted-foreground).
 
 ## Usage
 

@@ -30,8 +30,12 @@ The public site (obutia.com) does **not** use this package.
   `.back-link` (the quiet "‹ Parent" link above a `.page-title` on any
   child page), `.filter-bar` (a row of filter controls forced to one
   shared height — `--control-h`; set it to `var(--row-h)` to align with a
-  data table), and `.checkbox` (the small square toggle used in
-  multi-select menus and step lists).
+  data table), `.checkbox` (the small square toggle used in
+  multi-select menus and step lists), `.pill` (the neutral grey
+  informational badge — channel, tags — one flat chip family; status colour
+  lives on `.row-accent`, not here), and `.row-accent` (Airtable-style left
+  stripe on a table row flagging a row-level state; colour via
+  `data-accent="human|replied|cold"` → `--warning`/`--success`/`--destructive`).
 - `typography.css` — the shared type scale (class-based, framework
   neutral). Being defined incrementally:
   - `.page-title` — H1 at the top of every admin page (Inter 48 / 600 / -0.03em).

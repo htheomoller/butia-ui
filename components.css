@@ -240,3 +240,40 @@
   background: var(--primary);
   border-color: var(--primary);
 }
+
+/* Pill — the neutral informational badge (channel, tags in a data table).
+   A flat grey chip: same fill, text colour and curve everywhere, so every
+   *informational* badge reads as one family. Status/semantic colour does
+   NOT belong here — that's .row-accent. Reference: the People table's
+   "Canal" cell. Width/shrink are the app's job (add a utility). */
+.pill {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.45;
+  padding: 2px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
+}
+
+/* Row status accent — an Airtable-style vertical stripe on the left edge of
+   a table row, flagging a row-level state at a glance (one colour instead
+   of scattered dots/badges). This class is the stripe's shape + semantic
+   colour; the app anchors it by making the row's gutter cell the containing
+   block and dropping this span inside (position is baked in here). Drive the
+   colour with data-accent, mapped to the shared semantic tokens. */
+.row-accent {
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 58%;
+  border-radius: 9999px;
+  pointer-events: none;
+}
+.row-accent[data-accent="human"]   { background: var(--warning); }
+.row-accent[data-accent="replied"] { background: var(--success); }
+.row-accent[data-accent="cold"]    { background: var(--destructive); }

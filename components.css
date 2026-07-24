@@ -131,3 +131,76 @@
 .split-pane > * + * {
   border-left: 1px solid var(--border-soft);
 }
+
+/* Info hint — a small superscript "ℹ" that sits next to a page/section
+   title and reveals supporting copy in a dark tooltip (Airtable style:
+   dark --foreground bubble, light --background text). The copy that used
+   to be a subheadline lives inside the bubble instead.
+
+   Pure CSS, no JS/portal — so it behaves identically in both apps (no
+   Radix vs Base-UI split). Opens on BOTH hover and focus, so a click or
+   tap (focus) works on touch where hover doesn't; clicking away (blur)
+   closes it. Structure:
+     <button class="info-hint"><svg .../><span class="info-hint__tip">…</span></button>
+   The button carries NO margin — set the superscript offset with a
+   utility on the element (e.g. mt-2), keeping margins out of the tokens. */
+.info-hint {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: help;
+  color: color-mix(in srgb, var(--muted-foreground) 55%, transparent);
+  transition: color 0.15s ease;
+}
+.info-hint:hover,
+.info-hint:focus-visible {
+  color: var(--foreground);
+  outline: none;
+}
+.info-hint > svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+.info-hint__tip {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--foreground);
+  color: var(--background);
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: left;
+  padding: 8px 12px;
+  border-radius: 6px;
+  width: max-content;
+  max-width: 300px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / 0.18);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.12s ease;
+  z-index: 50;
+  pointer-events: none;
+}
+.info-hint__tip::before {
+  content: "";
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  background: var(--foreground);
+  transform: translateY(-50%) rotate(45deg);
+  border-radius: 2px;
+}
+.info-hint:hover .info-hint__tip,
+.info-hint:focus .info-hint__tip,
+.info-hint:focus-within .info-hint__tip {
+  opacity: 1;
+  visibility: visible;
+}

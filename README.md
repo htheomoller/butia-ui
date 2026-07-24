@@ -20,9 +20,12 @@ The public site (obutia.com) does **not** use this package.
 - `components.css` — class-based pieces of the admin look:
   `.seg`, `.seg-timeline` segmented controls, `.kbd`, `.card-cta`
   (clickable "card com chamada": 80%-width copy column + underlined CTA
-  line; the whole card is the click target), and `.split-pane` (one
+  line; the whole card is the click target), `.split-pane` (one
   white frame split into columns by a hairline — list/table left,
-  editor/detail right; set the split with a grid utility on the element).
+  editor/detail right; set the split with a grid utility on the element),
+  and `.info-hint` (superscript "ℹ" next to a title that reveals its
+  supporting copy in a dark tooltip — Airtable style; pure CSS, opens on
+  hover AND focus so click/tap works, no Radix/portal).
 - `typography.css` — the shared type scale (class-based, framework
   neutral). Being defined incrementally:
   - `.page-title` — H1 at the top of every admin page (Inter 48 / 600 / -0.03em).

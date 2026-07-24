@@ -23,9 +23,9 @@ The public site (obutia.com) does **not** use this package.
   line; the whole card is the click target), `.split-pane` (one
   white frame split into columns by a hairline — list/table left,
   editor/detail right; set the split with a grid utility on the element),
-  and `.info-hint` (superscript "ℹ" next to a title that reveals its
-  supporting copy in a dark tooltip — Airtable style; pure CSS, opens on
-  hover AND focus so click/tap works, no Radix/portal).
+  and `.info-hint` (the superscript "ℹ" trigger next to a title — muted
+  icon that lifts on hover/focus; the app's own tooltip renders the white
+  help bubble, so collision handling lives with Radix/Base UI, not here).
 - `typography.css` — the shared type scale (class-based, framework
   neutral). Being defined incrementally:
   - `.page-title` — H1 at the top of every admin page (Inter 48 / 600 / -0.03em).

@@ -274,6 +274,6 @@
   border-radius: 9999px;
   pointer-events: none;
 }
-.row-accent[data-accent="human"]   { background: var(--warning); }
-.row-accent[data-accent="replied"] { background: var(--success); }
-.row-accent[data-accent="cold"]    { background: var(--destructive); }
+.row-accent[data-accent="human"]   { background: var(--signal-amber); }
+.row-accent[data-accent="replied"] { background: var(--signal-green); }
+.row-accent[data-accent="cold"]    { background: var(--signal-red); }

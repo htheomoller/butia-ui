@@ -54,6 +54,14 @@
   --warning: hsl(38 55% 48%);
   --warning-foreground: hsl(30 10% 15%);
 
+  /* Vivid signal colours for status accents (row stripes, dots). Deliberately
+     brighter than the earth-tone status tokens above — a signal must pop.
+     Palette-independent (same in warm/admin, light/dark): a red stripe reads
+     red everywhere. Defined once here; inherited by all palette blocks. */
+  --signal-amber: hsl(38 92% 50%);
+  --signal-green: hsl(160 84% 39%);
+  --signal-red: hsl(0 84% 60%);
+
   --border: hsl(35 10% 88%);
   --border-soft: hsl(35 10% 92%);
   --input: hsl(35 10% 88%);

@@ -35,7 +35,9 @@ The public site (obutia.com) does **not** use this package.
   informational badge — channel, tags — one flat chip family; status colour
   lives on `.row-accent`, not here), and `.row-accent` (Airtable-style left
   stripe on a table row flagging a row-level state; colour via
-  `data-accent="human|replied|cold"` → `--warning`/`--success`/`--destructive`).
+  `data-accent="human|replied|cold"` → `--signal-amber`/`--signal-green`/`--signal-red`,
+  the vivid signal colours — brighter than the earth-tone status tokens, since
+  a stripe must pop).
 - `typography.css` — the shared type scale (class-based, framework
   neutral). Being defined incrementally:
   - `.page-title` — H1 at the top of every admin page (Inter 48 / 600 / -0.03em).

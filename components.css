@@ -26,6 +26,9 @@
 .seg > span[data-active="true"] {
   background: var(--card);
   color: var(--foreground);
+  /* Selected item reads heavier than the muted 500 of the others, so the
+     active choice is unmistakable at a glance. */
+  font-weight: 600;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
 }
 
@@ -167,4 +170,73 @@
   width: 15px;
   height: 15px;
   display: block;
+}
+
+/* Back link — the quiet "‹ Parent" navigation that sits ABOVE a
+   .page-title on any page reached from a parent ("mother") page. Standard
+   for every child page: it names where you came from and takes you back.
+   Muted at rest, lifts to --foreground on hover. Pair with a small
+   chevron/arrow icon from the app's icon set as the first child (the app
+   supplies the icon; the design system stays framework-neutral). */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--muted-foreground);
+  transition: color 0.15s ease;
+}
+.back-link:hover {
+  color: var(--foreground);
+}
+
+/* Filter bar — a row of filter controls (segmented .seg "pills", a
+   dropdown trigger, a search input) that all share ONE height, so the
+   toolbar reads as a single band instead of a ragged line. The height is
+   --control-h; align the bar to a data table by setting
+   --control-h: var(--row-h) on it. The .seg is matched automatically
+   (its height normally comes from padding); bare controls opt in with
+   .filter-control. */
+.filter-bar {
+  --control-h: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.filter-bar .seg {
+  height: var(--control-h);
+  align-items: stretch;
+}
+.filter-bar .seg button,
+.filter-bar .seg > span {
+  display: inline-flex;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+/* Opt-in for non-.seg controls in the bar (dropdown trigger, search
+   input) so they inherit the shared height. */
+.filter-bar .filter-control {
+  height: var(--control-h);
+}
+
+/* Checkbox — the small square toggle used inside multi-select menus (the
+   accounts dropdown) and step lists. Empty with a muted border at rest;
+   fills with --primary and shows a check when on. Drive the on-state with
+   data-checked="true" and place the app's check icon inside. */
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  border: 1.5px solid color-mix(in srgb, var(--muted-foreground) 55%, transparent);
+  color: var(--primary-foreground);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.checkbox[data-checked="true"] {
+  background: var(--primary);
+  border-color: var(--primary);
 }

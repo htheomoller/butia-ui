@@ -80,15 +80,22 @@
      these needs NO dark: variant and no palette variant.
 
      Declared once here; every palette block below inherits the expressions
-     and re-resolves them against its own --card / --foreground. */
+     and re-resolves them against its own --card / --foreground.
+
+     The 55% is measured, not taste: it is the highest share of family colour
+     that still clears WCAG AA (4.5:1) for `strong` on `soft` in ALL FOUR
+     combinations of palette and mode. Worst case at 55% is 5.0:1; at 62% the
+     destructive chip in dark mode falls to 4.47 and fails. Raise it and you
+     lose legibility, lower it and the chip turns grey — re-measure before
+     touching it. */
   --success-soft: color-mix(in srgb, var(--success) 14%, var(--card));
-  --success-strong: color-mix(in srgb, var(--success) 70%, var(--foreground));
+  --success-strong: color-mix(in srgb, var(--success) 55%, var(--foreground));
   --warning-soft: color-mix(in srgb, var(--warning) 14%, var(--card));
-  --warning-strong: color-mix(in srgb, var(--warning) 70%, var(--foreground));
+  --warning-strong: color-mix(in srgb, var(--warning) 55%, var(--foreground));
   --destructive-soft: color-mix(in srgb, var(--destructive) 14%, var(--card));
-  --destructive-strong: color-mix(in srgb, var(--destructive) 70%, var(--foreground));
+  --destructive-strong: color-mix(in srgb, var(--destructive) 55%, var(--foreground));
   --info-soft: color-mix(in srgb, var(--info) 14%, var(--card));
-  --info-strong: color-mix(in srgb, var(--info) 70%, var(--foreground));
+  --info-strong: color-mix(in srgb, var(--info) 55%, var(--foreground));
 
   /* ---- Avatar palette ----------------------------------------------------
      Categorical, NOT semantic: these carry no meaning beyond "different

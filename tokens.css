@@ -54,6 +54,11 @@
   --warning: hsl(38 55% 48%);
   --warning-foreground: hsl(30 10% 15%);
 
+  /* Info — the fourth semantic family: a note or explanation that is neither
+     good news, bad news, nor a warning. Was raw blue-* utilities before. */
+  --info: hsl(210 42% 45%);
+  --info-foreground: hsl(40 20% 98%);
+
   /* Vivid signal colours for status accents (row stripes, dots). Deliberately
      brighter than the earth-tone status tokens above — a signal must pop.
      Palette-independent (same in warm/admin, light/dark): a red stripe reads
@@ -61,6 +66,43 @@
   --signal-amber: hsl(38 92% 50%);
   --signal-green: hsl(160 84% 39%);
   --signal-red: hsl(0 84% 60%);
+
+  /* ---- Soft / strong pairs, one per semantic family ----------------------
+     The two shades every status chip, badge and callout needs: `soft` is the
+     tinted fill, `strong` is the text that sits on it.
+
+     Both are DERIVED from the family colour rather than picked by hand, so
+     changing --warning moves its chip too. And because soft mixes into
+     --card while strong mixes into --foreground, they invert on their own:
+     in light mode strong darkens (a deep amber on a pale tint), in dark mode
+     the same expression lightens (a pale amber on a deep tint). Same for the
+     admin palette. That is the whole point — a status chip written with
+     these needs NO dark: variant and no palette variant.
+
+     Declared once here; every palette block below inherits the expressions
+     and re-resolves them against its own --card / --foreground. */
+  --success-soft: color-mix(in srgb, var(--success) 14%, var(--card));
+  --success-strong: color-mix(in srgb, var(--success) 70%, var(--foreground));
+  --warning-soft: color-mix(in srgb, var(--warning) 14%, var(--card));
+  --warning-strong: color-mix(in srgb, var(--warning) 70%, var(--foreground));
+  --destructive-soft: color-mix(in srgb, var(--destructive) 14%, var(--card));
+  --destructive-strong: color-mix(in srgb, var(--destructive) 70%, var(--foreground));
+  --info-soft: color-mix(in srgb, var(--info) 14%, var(--card));
+  --info-strong: color-mix(in srgb, var(--info) 70%, var(--foreground));
+
+  /* ---- Avatar palette ----------------------------------------------------
+     Categorical, NOT semantic: these carry no meaning beyond "different
+     person, different colour" (an initials bubble picked by hashing the
+     contact's phone). Spread around the wheel on purpose, and identical in
+     both palettes and both modes — a person's colour must not change when
+     the theme does, or you stop recognising them. */
+  --avatar-1: hsl(160 60% 34%);
+  --avatar-2: hsl(200 75% 42%);
+  --avatar-3: hsl(262 60% 52%);
+  --avatar-4: hsl(350 65% 50%);
+  --avatar-5: hsl(38 75% 45%);
+  --avatar-6: hsl(175 60% 34%);
+  --avatar-7: hsl(240 55% 55%);
 
   --border: hsl(35 10% 88%);
   --border-soft: hsl(35 10% 92%);
@@ -126,6 +168,11 @@
   --success-foreground: hsl(40 20% 98%);
   --warning: hsl(38 45% 52%);
   --warning-foreground: hsl(30 8% 8%);
+  --info: hsl(210 40% 58%);
+  --info-foreground: hsl(30 8% 8%);
+
+  /* soft/strong and the avatar palette are inherited from :root — the
+     expressions there re-resolve against the dark --card / --foreground. */
 
   --border: hsl(30 6% 18%);
   --border-soft: hsl(30 6% 15%);

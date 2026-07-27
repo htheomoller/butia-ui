@@ -271,6 +271,63 @@
   padding: 2px 6px;
 }
 
+/* Simple table — a data table WITHOUT the spreadsheet machinery. Same cell
+   language as each app's DataGrid (40px header, 13.5px cells, hairline grid,
+   14px gutters, tabular numerals) so a plain list reads as the same family,
+   but no row-number gutter, no column resizing, no column toggle.
+
+   For the master list inside a .split-pane and for short standalone tables —
+   the places where a full DataGrid would be heavier than the data deserves.
+   Every one of those was previously a hand-copy of the grid's cell classes,
+   and they had drifted into three different looks.
+
+   This class sets BOX ONLY. Put `.field-label` on each `th` for the type —
+   the scale stays in typography.css rather than being duplicated here.
+
+   Row height defaults to 40px; override with --row-h on the table.
+   Rows opt into pointer + selection with data-clickable / data-selected. */
+.table-simple {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+.table-simple th,
+.table-simple td {
+  padding: 0 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.table-simple th {
+  height: 40px;
+  white-space: nowrap;
+  user-select: none;
+}
+.table-simple td {
+  height: var(--row-h, 40px);
+  font-size: 13.5px;
+  color: var(--foreground);
+}
+.table-simple th:last-child,
+.table-simple td:last-child {
+  border-right: 0;
+}
+.table-simple tbody tr:last-child td {
+  border-bottom: 0;
+}
+/* border-separate means a background on the <tr> does not paint — the cells
+   have to carry it, which is why these target td rather than tr. */
+.table-simple tbody tr[data-clickable="true"] {
+  cursor: pointer;
+}
+.table-simple tbody tr:hover td {
+  background: var(--muted);
+}
+.table-simple tbody tr[data-selected="true"] td {
+  background: var(--accent);
+}
+
 /* Row status accent — an Airtable-style vertical stripe on the left edge of
    a table row, flagging a row-level state at a glance (one colour instead
    of scattered dots/badges). This class is the stripe's shape + semantic

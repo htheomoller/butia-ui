@@ -35,7 +35,11 @@ The public site (obutia.com) does **not** use this package.
   informational badge — channel, tags — one flat chip family; status colour
   lives on `.row-accent`, not here) with its `.pill-caps` modifier (same
   chip, small/bold/uppercase — the one-word qualifier beside a heading,
-  e.g. "HOJE" next to a group band's date), and `.row-accent` (Airtable-style left
+  e.g. "HOJE" next to a group band's date), `.table-simple` (a data table with
+  the DataGrid's cell language but none of its machinery — for split-pane
+  master lists and short standalone tables; box only, pair each `th` with
+  `.field-label`, override `--row-h`, opt rows in with
+  `data-clickable` / `data-selected`), and `.row-accent` (Airtable-style left
   stripe on a table row flagging a row-level state; colour via
   `data-accent="human|replied|cold"` → `--signal-amber`/`--signal-green`/`--signal-red`,
   the vivid signal colours — brighter than the earth-tone status tokens, since

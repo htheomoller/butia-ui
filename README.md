@@ -33,7 +33,9 @@ The public site (obutia.com) does **not** use this package.
   data table), `.checkbox` (the small square toggle used in
   multi-select menus and step lists), `.pill` (the neutral grey
   informational badge — channel, tags — one flat chip family; status colour
-  lives on `.row-accent`, not here), and `.row-accent` (Airtable-style left
+  lives on `.row-accent`, not here) with its `.pill-caps` modifier (same
+  chip, small/bold/uppercase — the one-word qualifier beside a heading,
+  e.g. "HOJE" next to a group band's date), and `.row-accent` (Airtable-style left
   stripe on a table row flagging a row-level state; colour via
   `data-accent="human|replied|cold"` → `--signal-amber`/`--signal-green`/`--signal-red`,
   the vivid signal colours — brighter than the earth-tone status tokens, since
@@ -44,6 +46,13 @@ The public site (obutia.com) does **not** use this package.
   - `.card-title` — heading inside a card or section (Inter 24 / 600 / -0.01em).
   - `.page-subtitle` — muted 14px supporting / caption text (the quiet
     secondary voice; bakes in --muted-foreground).
+  - `.field-label` — the small uppercase label that names a value: a data
+    table's column header, the caption above a field in a panel or editor,
+    the key in a key/value row (Inter 10.5 / 500 / 0.07em / muted). The most
+    repeated piece of type in the admin tool.
+  - `.field-label-quiet` — the same label one step back, for use inside a
+    popover or menu where a full-strength label would compete with the
+    content it introduces (10px, half-faded).
 
 ## Patterns
 

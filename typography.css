@@ -54,3 +54,32 @@
   letter-spacing: normal;
   color: var(--muted-foreground);
 }
+
+/* Field label — the small uppercase label that names a value: a data-table
+   column header, the caption above a field in a panel or editor, the key in
+   a key/value row. The most repeated piece of type in the admin tool, so it
+   belongs here rather than in each app. Colour is part of its identity (it
+   is always the quiet label next to a loud value). */
+.field-label {
+  font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* Quiet variant — the same label one step back, for use INSIDE a popover or
+   menu, where the surrounding chrome is already small and a full-strength
+   label would compete with the content it introduces. Smaller and half-faded;
+   everything else is the field label. */
+.field-label-quiet {
+  font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--muted-foreground) 50%, transparent);
+}

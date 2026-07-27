@@ -258,6 +258,19 @@
   color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
+/* Caps modifier — the same chip shrunk to a shout: small, bold, uppercase.
+   For the one-word qualifier that rides ALONGSIDE a heading rather than
+   inside a data cell ("HOJE" / "AMANHÃ" next to a group band's date). Same
+   fill and text colour as .pill on purpose, so the two read as one family.
+   Compose it: class="pill pill-caps". */
+.pill-caps {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+}
+
 /* Row status accent — an Airtable-style vertical stripe on the left edge of
    a table row, flagging a row-level state at a glance (one colour instead
    of scattered dots/badges). This class is the stripe's shape + semantic

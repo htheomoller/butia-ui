@@ -104,6 +104,17 @@
   --avatar-6: hsl(175 60% 34%);
   --avatar-7: hsl(240 55% 55%);
 
+  /* ---- WhatsApp brand ----------------------------------------------------
+     Colours we do NOT own. They must match WhatsApp exactly and must NOT be
+     re-tinted by our palette — a read tick that is not WhatsApp's blue stops
+     reading as a read tick. Named here so the same mark is the same colour in
+     every component (the tick used to be #53bdeb in one place and #007bfc in
+     another). Only the outgoing bubble has a dark twin, because WhatsApp
+     itself has one. */
+  --wa-tick-read: #53bdeb;
+  --wa-brand: #25d366;
+  --wa-bubble-out: #d9fdd3;
+
   --border: hsl(35 10% 88%);
   --border-soft: hsl(35 10% 92%);
   --input: hsl(35 10% 88%);
@@ -170,6 +181,10 @@
   --warning-foreground: hsl(30 8% 8%);
   --info: hsl(210 40% 58%);
   --info-foreground: hsl(30 8% 8%);
+
+  /* WhatsApp's own dark-mode outgoing bubble. The tick and brand green do
+     not change — WhatsApp keeps them constant, so we do too. */
+  --wa-bubble-out: #005c4b;
 
   /* soft/strong and the avatar palette are inherited from :root — the
      expressions there re-resolve against the dark --card / --foreground. */

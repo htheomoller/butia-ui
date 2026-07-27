@@ -42,6 +42,45 @@
   letter-spacing: -0.01em;
 }
 
+/* Section title — the heading of a card or block, one step below the card
+   title: the "Simulador" / "Convites pendentes" / "Posição atual" line that
+   opens a settings card, a stat card or a bordered block, almost always with
+   a muted description right under it.
+
+   This is the level the scale was missing. It was being written by hand as
+   `text-sm font-semibold` (dashboard, 14px) and `text-[15px] font-semibold`
+   (ledger) — the same heading, 1px apart, in two apps. 15 splits them.
+
+   Distinct from .page-subtitle, which is the SAME 14-15px band but quiet:
+   subtitle = weight 400 muted (supporting voice), section title = weight 600
+   foreground (a heading). Weight and colour carry the difference, not size. */
+.section-title {
+  font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+/* Section label — the small-caps band that names a REGION of a page rather
+   than a value: "Fila e enviados", "Fatura atual". Same family as
+   .field-label, one step up — bigger and bolder, because it heads a block
+   instead of captioning a single field.
+
+   Was three sizes for one job (14px in the dashboard's toques, 13px in the
+   ledger's Lançamentos, 12px in proposal-detail). Use .section-title instead
+   when the heading is sentence case — this one is for the caps treatment. */
+.section-label {
+  font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
 /* Page subtitle — the muted supporting line under a page title, and the
    workhorse for descriptive / caption text at the same 14px size. Color
    is part of its identity (it is always the quiet, secondary voice), so

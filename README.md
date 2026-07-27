@@ -54,6 +54,13 @@ The public site (obutia.com) does **not** use this package.
     table's column header, the caption above a field in a panel or editor,
     the key in a key/value row (Inter 10.5 / 500 / 0.07em / muted). The most
     repeated piece of type in the admin tool.
+  - `.section-title` — the heading of a card or block, one step below the
+    card title (Inter 15 / 600 / -0.01em / foreground). Same size band as
+    `.page-subtitle`; weight and colour carry the difference (heading vs
+    supporting voice), not size.
+  - `.section-label` — the small-caps band naming a REGION of a page
+    ("Fila e enviados"). Same family as `.field-label`, one step up
+    (12.5 / 600 / 0.06em / muted). Use `.section-title` for sentence case.
   - `.field-label-quiet` — the same label one step back, for use inside a
     popover or menu where a full-strength label would compete with the
     content it introduces (10px, half-faded).

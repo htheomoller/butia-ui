@@ -41,7 +41,8 @@ The public site (obutia.com) does **not** use this package.
   `.field-label`, override `--row-h`, opt rows in with
   `data-clickable` / `data-selected`), and `.row-accent` (Airtable-style left
   stripe on a table row flagging a row-level state; colour via
-  `data-accent="human|replied|cold"` → `--signal-amber`/`--signal-green`/`--signal-red`,
+  `data-accent="human|novo|replied|cold"` →
+  `--signal-red`/`--signal-yellow`/`--signal-green`/`--signal-gray`,
   the vivid signal colours — brighter than the earth-tone status tokens, since
   a stripe must pop).
 - `typography.css` — the shared type scale (class-based, framework

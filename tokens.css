@@ -64,8 +64,13 @@
      Palette-independent (same in warm/admin, light/dark): a red stripe reads
      red everywhere. Defined once here; inherited by all palette blocks. */
   --signal-amber: hsl(38 92% 50%);
+  --signal-yellow: hsl(48 96% 53%);
   --signal-green: hsl(160 84% 39%);
   --signal-red: hsl(0 84% 60%);
+  /* The one that doesn't shout: marks a spent state (went cold, over and done)
+     without competing with the others. Light enough to survive the dark card,
+     dark enough to show on the light one. */
+  --signal-gray: hsl(30 5% 62%);
 
   /* ---- Soft / strong pairs, one per semantic family ----------------------
      The two shades every status chip, badge and callout needs: `soft` is the

@@ -38,8 +38,9 @@ The public site (obutia.com) does **not** use this package.
   e.g. "HOJE" next to a group band's date), `.table-simple` (a data table with
   the DataGrid's cell language but none of its machinery — for split-pane
   master lists and short standalone tables; box only, pair each `th` with
-  `.field-label`, override `--row-h`, opt rows in with
-  `data-clickable` / `data-selected`), and `.row-accent` (Airtable-style left
+  `.field-label`, rows are a fixed 40px — override with `--table-row-h`, NOT
+  `--row-h`, which the ledger defines globally for its own cells; opt rows in
+  with `data-clickable` / `data-selected`), and `.row-accent` (Airtable-style left
   stripe on a table row flagging a row-level state; colour via
   `data-accent="human|novo|replied|cold"` →
   `--signal-red`/`--signal-yellow`/`--signal-green`/`--signal-gray`,

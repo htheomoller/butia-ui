@@ -284,7 +284,14 @@
    This class sets BOX ONLY. Put `.field-label` on each `th` for the type —
    the scale stays in typography.css rather than being duplicated here.
 
-   Row height defaults to 40px; override with --row-h on the table.
+   Row height is a FIXED 40px; override per table with --table-row-h.
+
+   The knob is deliberately NOT called --row-h: the ledger defines --row-h
+   globally on :root (42px, for its own .ledger-row), so a generic name here
+   got silently captured by the host app and the same class rendered 40px in
+   one app and 42px in the other. A shared class must not read a variable an
+   app might define for its own reasons — the knob carries the class's name.
+
    Rows opt into pointer + selection with data-clickable / data-selected. */
 .table-simple {
   width: 100%;
@@ -305,7 +312,7 @@
   user-select: none;
 }
 .table-simple td {
-  height: var(--row-h, 40px);
+  height: var(--table-row-h, 40px);
   font-size: 13.5px;
   color: var(--foreground);
 }

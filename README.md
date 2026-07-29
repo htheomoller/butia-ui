@@ -41,8 +41,10 @@ The public site (obutia.com) does **not** use this package.
   `.field-label`, rows are a fixed 40px — override with `--table-row-h`, NOT
   `--row-h`, which the ledger defines globally for its own cells; opt rows in
   with `data-clickable` / `data-selected`), and `.row-accent` (Airtable-style left
-  stripe on a table row flagging a row-level state; colour via
-  `data-accent="human|novo|replied|cold"` →
+  stripe on a table row flagging a row-level state; colour via `data-accent`,
+  in two families — the Butiá-domain keys `human|novo|replied|cold` (the state
+  of a PERSON in a conversation) and the generic `danger|warn|ok|muted`, for a
+  table whose state isn't a person's (a bounced send, an overdue bill) →
   `--signal-red`/`--signal-yellow`/`--signal-green`/`--signal-gray`,
   the vivid signal colours — brighter than the earth-tone status tokens, since
   a stripe must pop).

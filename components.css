@@ -351,7 +351,20 @@
   border-radius: 9999px;
   pointer-events: none;
 }
+/* Two families of key, on purpose:
+
+   DOMÍNIO (Gente do Butiá) — o estado é da PESSOA na conversa, e o nome só
+   faz sentido lá dentro. */
 .row-accent[data-accent="human"]   { background: var(--signal-red); }
 .row-accent[data-accent="novo"]    { background: var(--signal-yellow); }
 .row-accent[data-accent="replied"] { background: var(--signal-green); }
 .row-accent[data-accent="cold"]    { background: var(--signal-gray); }
+
+/* GENÉRICAS — para uma tabela cujo estado não é o de uma pessoa (um envio que
+   voltou, uma cobrança vencida). Existem para não haver a tentação de marcar
+   um e-mail devolvido como "human" só porque a cor era a certa: a faixa ficaria
+   com o nome errado no código para sempre. */
+.row-accent[data-accent="danger"]  { background: var(--signal-red); }
+.row-accent[data-accent="warn"]    { background: var(--signal-yellow); }
+.row-accent[data-accent="ok"]      { background: var(--signal-green); }
+.row-accent[data-accent="muted"]   { background: var(--signal-gray); }

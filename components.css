@@ -469,6 +469,12 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: start;
   gap: 22px 18px;
+  /* The ruler answers to THIS box, not to the window. A viewport media
+     query is the wrong instrument here: the proposal record is a wide
+     window whose fields still live in a ~435px column beside the summary,
+     and there a 2-column field comes out 58px wide — unusable on a
+     1440px screen that no media query would ever flag. */
+  container-type: inline-size;
 }
 
 /* No strip and no rule under the foot: on the grey ground the buttons are
@@ -536,9 +542,20 @@
   height: var(--form-control-h);
   border-radius: 8px;
   border: 1px solid transparent;
-  background: var(--card);
-  box-shadow: 0 1px 2px hsl(220 20% 10% / 0.05);
+  /* The control is always the OPPOSITE of what it sits on — white on the
+     sheet's grey, grey on a white card. There is no border to carry the
+     edge, so if the two tones ever match, the field disappears. Default
+     assumes the grey ground; a grid inside a white card says so with
+     data-surface="card". */
+  background: var(--form-control-bg, var(--card));
+  box-shadow: var(--form-control-shadow, 0 1px 2px hsl(220 20% 10% / 0.05));
   font-size: 14px;
+}
+.form-grid[data-surface="card"] {
+  --form-control-bg: var(--background);
+  /* On a white card the tone change is enough; a shadow there would read
+     as a second box drawn around the first. */
+  --form-control-shadow: none;
 }
 .form-field textarea {
   height: auto;
@@ -599,16 +616,35 @@
   margin-top: 6px;
 }
 
-@media (max-width: 860px) {
-  .form-sheet-head { padding: 24px 20px 18px; }
-  .form-sheet-body { padding: 22px 20px 24px; gap: 20px; }
-  .form-sheet-foot { padding: 14px 20px; }
-  /* Both rulers collapse to one column. The selectors mirror the ones
-     above on purpose: a shorter `.form-sheet .form-field` would lose the
-     specificity match against `…:not([data-layout]) .form-field[data-span]`
-     and the fields would stay side by side on a phone. */
+/* ---- Two steps down, by container width --------------------------------
+   Below ~720px there is no room for a 2-of-12 field (it lands under 90px,
+   narrower than the date picker inside it), so the spans double up; below
+   ~480px everything takes the line. The selectors repeat the full form
+   used above — a shorter `.form-field[data-span]` would lose the
+   specificity match and nothing would collapse. */
+@container (max-width: 620px) {
+  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="2"],
+  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="3"] {
+    grid-column: span 4;
+  }
+  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="4"] {
+    grid-column: span 6;
+  }
+  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="6"],
+  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="8"] {
+    grid-column: span 12;
+  }
+}
+
+@container (max-width: 480px) {
   .form-sheet:not([data-layout="grade"]) .form-field[data-span],
   :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span] {
     grid-column: span 12;
   }
+}
+
+@media (max-width: 860px) {
+  .form-sheet-head { padding: 24px 20px 18px; }
+  .form-sheet-body { padding: 22px 20px 24px; gap: 20px; }
+  .form-sheet-foot { padding: 14px 20px; }
 }

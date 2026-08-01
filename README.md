@@ -126,6 +126,16 @@ Two conventions that are part CSS class, part app composition (like
   and is hidden automatically on a field narrower than a third of the
   window — there the explanation belongs in the `.info-hint` tooltip.
 
+  The ruler answers to the GRID's width, not the window's (container
+  query): under ~620px the spans double up, under ~480px everything takes
+  the line. A viewport media query would miss the case that matters — a
+  wide window whose fields sit in a narrow column beside a summary.
+
+  A control is always the opposite tone of what it sits on: white on the
+  sheet's grey by default, grey on a white card when the grid says
+  `data-surface="card"`. With no border to carry the edge, two matching
+  tones would erase the field.
+
 ## Usage
 
 ```json

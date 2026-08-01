@@ -368,3 +368,225 @@
 .row-accent[data-accent="warn"]    { background: var(--signal-yellow); }
 .row-accent[data-accent="ok"]      { background: var(--signal-green); }
 .row-accent[data-accent="muted"]   { background: var(--signal-gray); }
+
+/* ============================================================
+   FORM SHEET — the standard admin form window
+   ============================================================
+
+   Every dialog in the panel used to be the raw shadcn modal: 512px wide,
+   the same padding on all four sides, a 18px title, 36px controls stacked
+   12px apart and a paragraph of explanation piled on top of the first
+   field. It filled up cramped. This is the replacement, and it is only a
+   composition — every colour and type value below already existed.
+
+   Three bands: head (title + one supporting line, hairline under it), body
+   (the fields), foot (a quiet --muted strip that anchors the actions and
+   stays put when the body scrolls).
+
+   ONE geometry, TWO rulers. The body is always a 12-column grid; what
+   changes is how a field's data-span is read:
+
+   - no data-layout (or "coluna") — CREATING something. You fill it in
+     order, top to bottom, so columns would make the eye zigzag: a short
+     field takes half the line, everything else takes the line.
+   - data-layout="grade" — EDITING a record that already exists (the
+     proposal sheet, the contract). You arrive to change one field and scan
+     for it, so the span is honoured as written and a dozen fields fit
+     without scrolling.
+
+   The span comes from the DATA, not from what is left over in the row —
+   that is the whole difference from hand-picked widths, where rows end
+   ragged before the card edge:
+
+     2/12  short number, money, percent .... convidados, desconto, versão
+     3/12  date, time, short select ........ data do evento, válida até
+     4/12  medium select, phone, datetime .. tipo de evento, WhatsApp
+     6-8   name, e-mail, title ............. nome do evento
+     12    free text, address, note ........ observação interna
+
+   data-solo="true" keeps a field on a line of its own in the single-column
+   ruler (it is ignored in the grid) so nothing is left orphaned beside a
+   short neighbour. */
+.form-sheet {
+  --form-w: 560px;
+  --form-control-h: 40px;
+  display: flex;
+  flex-direction: column;
+  /* gap and padding are spelled out because this class sits on a shadcn
+     DialogContent, whose `gap-4`/`p-6` utilities would otherwise survive:
+     an unlayered @import beats a layered utility only where it declares
+     the same property. */
+  gap: 0;
+  padding: 0;
+  width: 100%;
+  max-width: min(var(--form-w), calc(100vw - 2rem));
+  max-height: 88vh;
+  /* The window is the PAGE grey, not a white card: white is reserved for
+     the controls, which then read as objects sitting on a surface. That
+     is what keeps this thing free of rules — the only separator in the
+     whole window is the change of colour between field and ground, so no
+     band, hairline or box has to draw the structure. */
+  background: var(--background);
+  /* Not even the window itself is outlined: over the dim overlay the drop
+     shadow already says where it ends. */
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+}
+.form-sheet[data-layout="grade"] {
+  --form-w: 900px;
+}
+
+.form-sheet-head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px 32px 20px;
+  flex: 0 0 auto;
+}
+
+/* The body is the only part that scrolls, so the foot never floats away
+   from the bottom of a long form. */
+.form-sheet-body {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: start;
+  gap: 22px 18px;
+  padding: 24px 32px 22px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+/* No strip and no rule under the foot: on the grey ground the buttons are
+   already the only solid shapes down there. What separates it from the
+   last field is space (and, when the body scrolls, the fact that the
+   fields slide under it). */
+.form-sheet-foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 6px 32px 26px;
+  flex: 0 0 auto;
+}
+/* Primary action last, hard right; anything on the left of the foot (a
+   quiet note, a secondary escape like "cadastrar pessoa nova") is pushed
+   away by the auto margin. */
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+/* ---- The field ---------------------------------------------------------
+   Label, help, control — in that order on screen no matter which order the
+   app writes them, because help belongs ABOVE the control: read after the
+   fact it is an erratum, read before it still saves the typing. Order is
+   pinned here rather than trusted to the markup. */
+.form-field {
+  grid-column: span 12;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+.form-field > * { order: 3; }
+.form-field > .form-label { order: 1; }
+.form-field > .form-hint { order: 2; }
+
+.form-hint {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+}
+
+/* Controls inside a field share one height, one curve and one skin: white
+   (--card) on the grey window, no border at all. Matched by shadcn's
+   data-slot (both apps ship it) plus the native elements the slot does not
+   cover — never by a bare `input`, which would also catch checkboxes and
+   the search box of a popover.
+
+   The border is transparent rather than absent so the box keeps its 1px,
+   and nothing shifts when focus paints it. Depth is a single hairline
+   shadow, not a rule: enough to lift the field off the grey, too little to
+   read as a box. */
+.form-field [data-slot="input"],
+.form-field select,
+.form-field textarea {
+  height: var(--form-control-h);
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: var(--card);
+  box-shadow: 0 1px 2px hsl(220 20% 10% / 0.05);
+  font-size: 14px;
+}
+.form-field textarea {
+  height: auto;
+  min-height: calc(var(--form-control-h) * 2);
+  padding-block: 9px;
+}
+/* With no border to thicken, focus is carried entirely by the ring — the
+   same one the apps already use, just unmistakable now that it is the only
+   thing that changes. */
+.form-field [data-slot="input"]:focus-visible,
+.form-field select:focus,
+.form-field select:focus-visible,
+.form-field textarea:focus,
+.form-field textarea:focus-visible {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 25%, transparent);
+}
+/* A disabled or read-only field stops being an object and goes back to
+   being part of the surface. */
+.form-field [data-slot="input"]:disabled,
+.form-field select:disabled,
+.form-field textarea:disabled {
+  background: color-mix(in srgb, var(--card) 45%, transparent);
+  box-shadow: none;
+}
+
+/* Grid ruler — spans as written. */
+.form-sheet[data-layout="grade"] .form-field[data-span="2"] { grid-column: span 2; }
+.form-sheet[data-layout="grade"] .form-field[data-span="3"] { grid-column: span 3; }
+.form-sheet[data-layout="grade"] .form-field[data-span="4"] { grid-column: span 4; }
+.form-sheet[data-layout="grade"] .form-field[data-span="6"] { grid-column: span 6; }
+.form-sheet[data-layout="grade"] .form-field[data-span="8"] { grid-column: span 8; }
+
+/* Single-column ruler — short field takes half a line, the rest takes the
+   line. data-solo overrides, so it must come after. */
+.form-sheet:not([data-layout="grade"]) .form-field[data-span="2"],
+.form-sheet:not([data-layout="grade"]) .form-field[data-span="3"],
+.form-sheet:not([data-layout="grade"]) .form-field[data-span="4"] { grid-column: span 6; }
+.form-sheet:not([data-layout="grade"]) .form-field[data-solo="true"] { grid-column: span 12; }
+
+/* A field narrower than a third of the window cannot carry a help line —
+   it wraps to three rows and drags the whole fileira out of alignment.
+   There the explanation belongs in the .info-hint tooltip instead. */
+.form-sheet[data-layout="grade"] .form-field[data-span="2"] .form-hint,
+.form-sheet[data-layout="grade"] .form-field[data-span="3"] .form-hint {
+  display: none;
+}
+
+/* Block separator — the extra breath between groups of fields ("who is
+   hiring" / "about the event"). Empty by default: at five or six fields a
+   captioned rule reads as bureaucracy. Put a .field-label inside only when
+   the form is long enough that the groups need naming. */
+.form-block {
+  grid-column: 1 / -1;
+  margin-top: 6px;
+}
+
+@media (max-width: 860px) {
+  .form-sheet-head { padding: 24px 20px 18px; }
+  .form-sheet-body { padding: 22px 20px 24px; gap: 20px; }
+  .form-sheet-foot { padding: 14px 20px; }
+  /* Both rulers collapse to one column. The selectors mirror the ones
+     above on purpose: a shorter `.form-sheet .form-field` would lose the
+     specificity match against `…:not([data-layout]) .form-field[data-span]`
+     and the fields would stay side by side on a phone. */
+  .form-sheet:not([data-layout="grade"]) .form-field[data-span],
+  .form-sheet[data-layout="grade"] .form-field[data-span] {
+    grid-column: span 12;
+  }
+}

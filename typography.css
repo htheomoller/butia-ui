@@ -122,3 +122,25 @@
   text-transform: uppercase;
   color: color-mix(in srgb, var(--muted-foreground) 50%, transparent);
 }
+
+/* Form label — the name of a field you are about to FILL IN, as opposed to
+   .field-label, which names a value you are about to READ (a table column
+   header, the key of a key/value row).
+
+   The distinction is worth a second class. At 10.5px uppercase muted, the
+   label of an editable field ends up weaker than the placeholder inside the
+   control it names — the caption wins over the caption's subject. And with a
+   dozen labels side by side in a grid form, the caps treatment turns into
+   texture. So: sentence case, 13px, full --foreground. Reads as a question
+   being asked, which is what it is.
+
+   Accents survive here too: "MES" and "HORARIO" went unnoticed for months in
+   the proposal sheet because uppercase hides a missing acute. */
+.form-label {
+  font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: normal;
+  color: var(--foreground);
+}

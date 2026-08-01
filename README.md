@@ -47,7 +47,8 @@ The public site (obutia.com) does **not** use this package.
   table whose state isn't a person's (a bounced send, an overdue bill) →
   `--signal-red`/`--signal-yellow`/`--signal-green`/`--signal-gray`,
   the vivid signal colours — brighter than the earth-tone status tokens, since
-  a stripe must pop).
+  a stripe must pop), and `.form-sheet` — the standard form window (see
+  **Patterns** below).
 - `typography.css` — the shared type scale (class-based, framework
   neutral). Being defined incrementally:
   - `.page-title` — H1 at the top of every admin page (Inter 48 / 600 / -0.03em).
@@ -68,6 +69,10 @@ The public site (obutia.com) does **not** use this package.
   - `.field-label-quiet` — the same label one step back, for use inside a
     popover or menu where a full-strength label would compete with the
     content it introduces (10px, half-faded).
+  - `.form-label` — the name of a field you FILL IN, as opposed to
+    `.field-label`, which names a value you READ (Inter 13 / 500 /
+    sentence case / foreground). At 10.5 uppercase muted an editable
+    field's label ends up weaker than its own placeholder.
 
 ## Patterns
 
@@ -91,6 +96,32 @@ Two conventions that are part CSS class, part app composition (like
 
   > Adoption across existing pages is incremental — page by page — not a
   > single sweep.
+
+- **Form window.** `.form-sheet` is the shape of every form dialog in the
+  panel: `-head` (title + one supporting line), `-body` (the fields),
+  `-foot` (the actions, which stay put while the body scrolls). Pair the
+  title with `.card-title` and each field's label with `.form-label`.
+
+  **No rules anywhere.** The window is the page grey (`--background`) and
+  the controls are white (`--card`) with no border — one hairline shadow
+  each. The change of colour between field and ground is the only
+  separator: no band under the title, no line above the foot, no box
+  around a group. Focus is carried by the ring alone, which is why the
+  control keeps a transparent 1px border (nothing shifts when it paints).
+
+  The body is always a 12-column grid; a `.form-field` declares
+  `data-span` from the TYPE OF DATA it holds — 2 for a short number, 3 for
+  a date, 4 for a select or a phone, 6–8 for a name, 12 for free text —
+  and the window picks the ruler with `data-layout`:
+
+  - `coluna` (default) — **creating**. Filled in sequence, so a short field
+    takes half a line and everything else takes the line. 560px.
+  - `grade` — **editing** a record that already exists. Spans are honoured
+    as written, so a dozen fields fit without scrolling. 900px.
+
+  Same markup either way. Help text sits above the control (`.form-hint`),
+  and is hidden automatically on a field narrower than a third of the
+  window — there the explanation belongs in the `.info-hint` tooltip.
 
 ## Usage
 

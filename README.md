@@ -109,8 +109,11 @@ Two conventions that are part CSS class, part app composition (like
   around a group. Focus is carried by the ring alone, which is why the
   control keeps a transparent 1px border (nothing shifts when it paints).
 
-  The body is always a 12-column grid; a `.form-field` declares
-  `data-span` from the TYPE OF DATA it holds — 2 for a short number, 3 for
+  The body is always a 12-column grid — the bed and its rulers are
+  `.form-grid`, which `.form-sheet-body` implies. Put `.form-grid` on any
+  block of fields that needs the same geometry without the sheet's window
+  chrome (the proposal record's tabs do exactly that). A `.form-field`
+  declares `data-span` from the TYPE OF DATA it holds — 2 for a short number, 3 for
   a date, 4 for a select or a phone, 6–8 for a name, 12 for free text —
   and the window picks the ruler with `data-layout`:
 

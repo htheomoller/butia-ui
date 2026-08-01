@@ -448,13 +448,27 @@
 /* The body is the only part that scrolls, so the foot never floats away
    from the bottom of a long form. */
 .form-sheet-body {
+  padding: 24px 32px 22px;
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+/* ---- The grid, on its own ----------------------------------------------
+   The 12-column bed and its two rulers live here rather than inside
+   .form-sheet-body, because the sheet is not the only place that needs
+   them: the proposal record is a big tabbed window, and its fields want
+   the same geometry without the window chrome that comes with a sheet
+   (its own width, background, three bands). There, put .form-grid on the
+   block of fields and the ruler applies the same way.
+
+   A .form-sheet-body IS a grid — the class is implied, so the two forms
+   already converted keep working with no markup change. */
+.form-grid,
+.form-sheet-body {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: start;
   gap: 22px 18px;
-  padding: 24px 32px 22px;
-  overflow-y: auto;
-  flex: 1 1 auto;
 }
 
 /* No strip and no rule under the foot: on the grey ground the buttons are
@@ -501,18 +515,24 @@
 }
 
 /* Controls inside a field share one height, one curve and one skin: white
-   (--card) on the grey window, no border at all. Matched by shadcn's
-   data-slot (both apps ship it) plus the native elements the slot does not
-   cover — never by a bare `input`, which would also catch checkboxes and
-   the search box of a popover.
+   (--card) on the grey window, no border at all. The match is by element
+   inside .form-field rather than by shadcn's data-slot, because a field's
+   control is not always a shadcn Input — the proposal record edits in
+   place with bare inputs. Checkbox and radio are excluded: they are not
+   boxes to be filled and would come out as 40px squares.
+
+   Width is pinned to the column, which is the whole point of the grid: a
+   control that sizes itself to its content is exactly what left the old
+   record with ragged rows that never reach the card edge.
 
    The border is transparent rather than absent so the box keeps its 1px,
    and nothing shifts when focus paints it. Depth is a single hairline
    shadow, not a rule: enough to lift the field off the grey, too little to
    read as a box. */
-.form-field [data-slot="input"],
+.form-field input:not([type="checkbox"]):not([type="radio"]),
 .form-field select,
 .form-field textarea {
+  width: 100%;
   height: var(--form-control-h);
   border-radius: 8px;
   border: 1px solid transparent;
@@ -528,7 +548,7 @@
 /* With no border to thicken, focus is carried entirely by the ring — the
    same one the apps already use, just unmistakable now that it is the only
    thing that changes. */
-.form-field [data-slot="input"]:focus-visible,
+.form-field input:focus-visible,
 .form-field select:focus,
 .form-field select:focus-visible,
 .form-field textarea:focus,
@@ -539,19 +559,21 @@
 }
 /* A disabled or read-only field stops being an object and goes back to
    being part of the surface. */
-.form-field [data-slot="input"]:disabled,
+.form-field input:disabled,
 .form-field select:disabled,
 .form-field textarea:disabled {
   background: color-mix(in srgb, var(--card) 45%, transparent);
   box-shadow: none;
 }
 
-/* Grid ruler — spans as written. */
-.form-sheet[data-layout="grade"] .form-field[data-span="2"] { grid-column: span 2; }
-.form-sheet[data-layout="grade"] .form-field[data-span="3"] { grid-column: span 3; }
-.form-sheet[data-layout="grade"] .form-field[data-span="4"] { grid-column: span 4; }
-.form-sheet[data-layout="grade"] .form-field[data-span="6"] { grid-column: span 6; }
-.form-sheet[data-layout="grade"] .form-field[data-span="8"] { grid-column: span 8; }
+/* Grid ruler — spans as written. The data-layout can sit on the sheet (a
+   form window) or on the grid itself (a block of fields inside something
+   else, like the proposal record's tabs). */
+:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="2"] { grid-column: span 2; }
+:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="3"] { grid-column: span 3; }
+:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="4"] { grid-column: span 4; }
+:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="6"] { grid-column: span 6; }
+:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="8"] { grid-column: span 8; }
 
 /* Single-column ruler — short field takes half a line, the rest takes the
    line. data-solo overrides, so it must come after. */
@@ -563,8 +585,8 @@
 /* A field narrower than a third of the window cannot carry a help line —
    it wraps to three rows and drags the whole fileira out of alignment.
    There the explanation belongs in the .info-hint tooltip instead. */
-.form-sheet[data-layout="grade"] .form-field[data-span="2"] .form-hint,
-.form-sheet[data-layout="grade"] .form-field[data-span="3"] .form-hint {
+:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="2"] .form-hint,
+:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="3"] .form-hint {
   display: none;
 }
 
@@ -586,7 +608,7 @@
      specificity match against `…:not([data-layout]) .form-field[data-span]`
      and the fields would stay side by side on a phone. */
   .form-sheet:not([data-layout="grade"]) .form-field[data-span],
-  .form-sheet[data-layout="grade"] .form-field[data-span] {
+  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span] {
     grid-column: span 12;
   }
 }

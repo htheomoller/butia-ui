@@ -468,7 +468,7 @@
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   align-items: start;
-  gap: 22px 18px;
+  gap: var(--form-grid-gap-y, 22px) var(--form-grid-gap-x, 18px);
   /* The ruler answers to THIS box, not to the window. A viewport media
      query is the wrong instrument here: the proposal record is a wide
      window whose fields still live in a ~435px column beside the summary,
@@ -507,7 +507,10 @@
   grid-column: span 12;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  /* The label-to-control gap belongs to the surface too: the form window
+     wants 7px under a 13px label, the proposal record wants 2px under its
+     10px one. */
+  gap: var(--form-field-gap, 7px);
   min-width: 0;
 }
 .form-field > * { order: 3; }
@@ -535,29 +538,41 @@
    and nothing shifts when focus paints it. Depth is a single hairline
    shadow, not a rule: enough to lift the field off the grey, too little to
    read as a box. */
+/* Width is the one thing the grid always imposes: a control that sizes
+   itself to its content is exactly what leaves rows ragged, never reaching
+   the edge of the card. Everything else about how a control LOOKS belongs
+   to the surface it lives on, not to the grid — see below. */
 .form-field input:not([type="checkbox"]):not([type="radio"]),
 .form-field select,
 .form-field textarea {
   width: 100%;
+}
+
+/* The skin is the sheet's, not the grid's.
+   ---------------------------------------------------------------------
+   These rules used to sit on .form-field, which meant that putting a grid
+   anywhere else dragged the form window's whole look along with it — 40px
+   controls, white fill, hairline shadow. Dropped into the proposal record,
+   which already had its own quieter language (36px controls, grey fill,
+   a half-faded 10px label), it read as a foreign body: heavier type,
+   taller boxes, different spacing, all in the middle of a screen that had
+   a standard.
+
+   So: the geometry (.form-grid) travels, the skin (.form-sheet) does not.
+   A grid used inside something that already has a look keeps that look. */
+.form-sheet .form-field input:not([type="checkbox"]):not([type="radio"]),
+.form-sheet .form-field select,
+.form-sheet .form-field textarea {
   height: var(--form-control-h);
   border-radius: 8px;
   border: 1px solid transparent;
-  /* The control is always the OPPOSITE of what it sits on — white on the
-     sheet's grey, grey on a white card. There is no border to carry the
-     edge, so if the two tones ever match, the field disappears. Default
-     assumes the grey ground; a grid inside a white card says so with
-     data-surface="card". */
-  background: var(--form-control-bg, var(--card));
-  box-shadow: var(--form-control-shadow, 0 1px 2px hsl(220 20% 10% / 0.05));
+  /* White on the sheet's grey. With no border to carry the edge, the tone
+     change is the only thing separating field from ground. */
+  background: var(--card);
+  box-shadow: 0 1px 2px hsl(220 20% 10% / 0.05);
   font-size: 14px;
 }
-.form-grid[data-surface="card"] {
-  --form-control-bg: var(--background);
-  /* On a white card the tone change is enough; a shadow there would read
-     as a second box drawn around the first. */
-  --form-control-shadow: none;
-}
-.form-field textarea {
+.form-sheet .form-field textarea {
   height: auto;
   min-height: calc(var(--form-control-h) * 2);
   padding-block: 9px;
@@ -565,20 +580,20 @@
 /* With no border to thicken, focus is carried entirely by the ring — the
    same one the apps already use, just unmistakable now that it is the only
    thing that changes. */
-.form-field input:focus-visible,
-.form-field select:focus,
-.form-field select:focus-visible,
-.form-field textarea:focus,
-.form-field textarea:focus-visible {
+.form-sheet .form-field input:focus-visible,
+.form-sheet .form-field select:focus,
+.form-sheet .form-field select:focus-visible,
+.form-sheet .form-field textarea:focus,
+.form-sheet .form-field textarea:focus-visible {
   outline: none;
   border-color: transparent;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--ring) 25%, transparent);
 }
 /* A disabled or read-only field stops being an object and goes back to
    being part of the surface. */
-.form-field input:disabled,
-.form-field select:disabled,
-.form-field textarea:disabled {
+.form-sheet .form-field input:disabled,
+.form-sheet .form-field select:disabled,
+.form-sheet .form-field textarea:disabled {
   background: color-mix(in srgb, var(--card) 45%, transparent);
   box-shadow: none;
 }
@@ -586,11 +601,11 @@
 /* Grid ruler — spans as written. The data-layout can sit on the sheet (a
    form window) or on the grid itself (a block of fields inside something
    else, like the proposal record's tabs). */
-:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="2"] { grid-column: span 2; }
-:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="3"] { grid-column: span 3; }
-:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="4"] { grid-column: span 4; }
-:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="6"] { grid-column: span 6; }
-:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="8"] { grid-column: span 8; }
+:is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="2"] { grid-column: span 2; }
+:is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="3"] { grid-column: span 3; }
+:is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="4"] { grid-column: span 4; }
+:is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="6"] { grid-column: span 6; }
+:is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="8"] { grid-column: span 8; }
 
 /* Single-column ruler — short field takes half a line, the rest takes the
    line. data-solo overrides, so it must come after. */
@@ -602,8 +617,8 @@
 /* A field narrower than a third of the window cannot carry a help line —
    it wraps to three rows and drags the whole fileira out of alignment.
    There the explanation belongs in the .info-hint tooltip instead. */
-:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="2"] .form-hint,
-:is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="3"] .form-hint {
+:is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="2"] .form-hint,
+:is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="3"] .form-hint {
   display: none;
 }
 
@@ -623,22 +638,22 @@
    used above — a shorter `.form-field[data-span]` would lose the
    specificity match and nothing would collapse. */
 @container (max-width: 620px) {
-  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="2"],
-  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="3"] {
+  :is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="2"],
+  :is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="3"] {
     grid-column: span 4;
   }
-  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="4"] {
+  :is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="4"] {
     grid-column: span 6;
   }
-  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="6"],
-  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span="8"] {
+  :is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="6"],
+  :is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span="8"] {
     grid-column: span 12;
   }
 }
 
 @container (max-width: 480px) {
   .form-sheet:not([data-layout="grade"]) .form-field[data-span],
-  :is(.form-sheet, .form-grid)[data-layout="grade"] .form-field[data-span] {
+  :is(.form-sheet[data-layout="grade"], .form-grid:not([data-layout="coluna"])) .form-field[data-span] {
     grid-column: span 12;
   }
 }

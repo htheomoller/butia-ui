@@ -6,14 +6,15 @@ bump the tag in both apps: the design updates everywhere.
 
 The public site (obutia.com) does **not** use this package.
 
-## O padrão (v0.17.0, 19/11/26) — não se reabre
+## O padrão (v0.18.0, 19/11/26) — não se reabre
 
 Decisão do Henrique depois de contar, no painel, 24 tamanhos de fonte, 15
 cinzas de texto, 37 botões com borda e uns 80 textos explicando a tela.
 
-- **Quatro tamanhos**, em variáveis (`typography.css`): `--type-title` 48
+- **Cinco tamanhos**, em variáveis (`typography.css`): `--type-title` 48
   (título da página), `--type-heading` 24 (título de janela, número de
-  destaque), `--type-body` 14 (todo o resto), `--type-label` 11 (rótulo em
+  destaque), `--type-body` 14 (todo o resto), `--type-tag` 12 (só a
+  etiqueta: `.tag` e `.pill`, desde v0.18.0), `--type-label` 11 (rótulo em
   caixa alta). Classe nova usa uma delas; nunca um número.
 - **Dois pesos**: normal e negrito. O negrito é o subtítulo.
 - **Uma cor de texto**: `--foreground`. No painel (`:root.admin`)

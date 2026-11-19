@@ -22,11 +22,41 @@
    element — do not add it back. Tailwind's preflight already zeroes
    default element margins. */
 
+/* ============================================================
+   A ESCALA TEM QUATRO TAMANHOS, E O TEXTO TEM UMA COR (v0.17.0, 19/11/26)
+   ============================================================
+
+   Decisão do Henrique depois de contar 24 tamanhos de fonte e 15 cinzas de
+   texto no painel. Não se reabre:
+
+     48  --type-title    título da página (.page-title)
+     24  --type-heading  título de janela e número de destaque (.card-title)
+     14  --type-body     todo o resto: corpo, tabela, formulário, botão,
+                         etiqueta, aviso, título de bloco (.section-title é
+                         14 em negrito: o peso faz o papel do subtítulo)
+     11  --type-label    rótulo em caixa alta (.field-label, .section-label)
+
+   Pesos: normal e negrito. Cor: --foreground, sempre. Não existe "cinza para
+   dado secundário": se um dado é secundário, ele sai da tela ou vai para
+   outro lugar, não fica mais claro. Por isso as classes abaixo que antes
+   eram cinza (.page-subtitle, .field-label, .section-label) agora são
+   --foreground, e o painel (:root.admin) iguala --muted-foreground a
+   --foreground.
+
+   Classe nova não inventa tamanho: usa uma das quatro variáveis. */
+
+:root {
+  --type-title: 48px;
+  --type-heading: 24px;
+  --type-body: 14px;
+  --type-label: 11px;
+}
+
 /* Page title — the H1 at the top of every admin page.
    Inter 48 / 600, tight editorial tracking. */
 .page-title {
   font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
-  font-size: 48px;
+  font-size: var(--type-title);
   font-weight: 600;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -36,7 +66,7 @@
    (one step below the page title). Inter 24 / 600. */
 .card-title {
   font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
-  font-size: 24px;
+  font-size: var(--type-heading);
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -0.01em;
@@ -56,10 +86,10 @@
    foreground (a heading). Weight and colour carry the difference, not size. */
 .section-title {
   font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
-  font-size: 15px;
+  font-size: var(--type-body);
   font-weight: 600;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  line-height: 1.5;
+  letter-spacing: normal;
   color: var(--foreground);
 }
 
@@ -73,12 +103,12 @@
    when the heading is sentence case — this one is for the caps treatment. */
 .section-label {
   font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
-  font-size: 12.5px;
+  font-size: var(--type-label);
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 /* Page subtitle — the muted supporting line under a page title, and the
@@ -87,11 +117,11 @@
    unlike the titles above it bakes in --muted-foreground. */
 .page-subtitle {
   font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
-  font-size: 14px;
+  font-size: var(--type-body);
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: normal;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 /* Field label — the small uppercase label that names a value: a data-table
@@ -101,12 +131,12 @@
    is always the quiet label next to a loud value). */
 .field-label {
   font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
-  font-size: 10.5px;
+  font-size: var(--type-label);
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--muted-foreground);
+  color: var(--foreground);
 }
 
 /* Quiet variant — the same label one step back, for use INSIDE a popover or
@@ -115,12 +145,12 @@
    everything else is the field label. */
 .field-label-quiet {
   font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
-  font-size: 10px;
+  font-size: var(--type-label);
   font-weight: 500;
   line-height: 1.4;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--muted-foreground) 50%, transparent);
+  color: var(--foreground);
 }
 
 /* Form label — the name of a field you are about to FILL IN, as opposed to
@@ -138,9 +168,9 @@
    the proposal sheet because uppercase hides a missing acute. */
 .form-label {
   font-family: "Inter", "Inter Fallback", system-ui, sans-serif;
-  font-size: 13px;
+  font-size: var(--type-body);
   font-weight: 500;
-  line-height: 1.4;
+  line-height: 1.5;
   letter-spacing: normal;
   color: var(--foreground);
 }

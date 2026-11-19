@@ -6,6 +6,29 @@ bump the tag in both apps: the design updates everywhere.
 
 The public site (obutia.com) does **not** use this package.
 
+## O padrão (v0.17.0, 19/11/26) — não se reabre
+
+Decisão do Henrique depois de contar, no painel, 24 tamanhos de fonte, 15
+cinzas de texto, 37 botões com borda e uns 80 textos explicando a tela.
+
+- **Quatro tamanhos**, em variáveis (`typography.css`): `--type-title` 48
+  (título da página), `--type-heading` 24 (título de janela, número de
+  destaque), `--type-body` 14 (todo o resto), `--type-label` 11 (rótulo em
+  caixa alta). Classe nova usa uma delas; nunca um número.
+- **Dois pesos**: normal e negrito. O negrito é o subtítulo.
+- **Uma cor de texto**: `--foreground`. No painel (`:root.admin`)
+  `--muted-foreground` virou a mesma cor. Só o placeholder de campo vazio é
+  cinza (`--placeholder`).
+- **Botão sem borda**, quatro tipos: principal (escuro), secundário (cinza
+  `--secondary`), discreto (só texto, fundo no hover) e destrutivo
+  (vermelho, só para o que não se desfaz). O componente mora em cada app;
+  a regra mora aqui.
+- **Etiqueta de categoria** é `.tag` com `data-color` (paleta escura do
+  Airtable, letra branca). Estado continua na `.row-accent`.
+- **Texto na tela**: primeira letra sempre maiúscula; nada de texto
+  explicando como a tela funciona; nada de juntar dados com "·"
+  ("Reabertura · 1.958") — cada dado no seu lugar.
+
 ## What's inside
 
 - `tokens.css` — the four palette blocks:

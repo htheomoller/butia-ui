@@ -249,7 +249,10 @@
   --secondary-foreground: hsl(220 12% 24%);
 
   --muted: hsl(220 14% 96%);
-  --muted-foreground: hsl(220 8% 42%);
+  /* Uma cor de texto só (v0.17.0): o cinza de texto do painel é o próprio
+     --foreground. O cinza de campo vazio mora em --placeholder. */
+  --muted-foreground: var(--foreground);
+  --placeholder: hsl(220 8% 55%);
 
   --accent: hsl(220 12% 94%);
   --accent-foreground: hsl(220 12% 16%);
@@ -291,7 +294,8 @@
   --secondary-foreground: hsl(220 12% 88%);
 
   --muted: hsl(220 10% 17%);
-  --muted-foreground: hsl(220 8% 55%);
+  --muted-foreground: var(--foreground);
+  --placeholder: hsl(220 8% 45%);
 
   --accent: hsl(220 10% 20%);
   --accent-foreground: hsl(220 12% 88%);
@@ -312,4 +316,20 @@
   --sidebar-accent-foreground: hsl(220 12% 88%);
   --sidebar-border: transparent;
   --sidebar-ring: hsl(220 8% 55%);
+}
+
+/* Etiquetas de categoria (.tag) — paleta escura do Airtable, letra branca.
+   Iguais nos dois temas: o fundo é escuro o bastante para o branco passar de
+   4,5:1 em todas, de dia ou de noite. */
+:root {
+  --tag-blue: #2750ae;
+  --tag-cyan: #0b76b7;
+  --tag-teal: #05837e;
+  --tag-green: #318616;
+  --tag-yellow: #a46803;
+  --tag-orange: #cc4924;
+  --tag-red: #ba1e45;
+  --tag-pink: #b2158b;
+  --tag-purple: #6b1cb0;
+  --tag-gray: #444444;
 }

@@ -32,8 +32,11 @@
      48  --type-title    título da página (.page-title)
      24  --type-heading  título de janela e número de destaque (.card-title)
      14  --type-body     todo o resto: corpo, tabela, formulário, botão,
-                         etiqueta, aviso, título de bloco (.section-title é
-                         14 em negrito: o peso faz o papel do subtítulo)
+                         aviso, título de bloco (.section-title é 14 em
+                         negrito: o peso faz o papel do subtítulo)
+     12  --type-tag      etiqueta (.tag e .pill), e só ela. Entrou em
+                         19/11/26 (v0.18.0): em 14 a etiqueta pesava demais
+                         e em 11 ficava pequena — decisão dele, olhando
      11  --type-label    rótulo em caixa alta (.field-label, .section-label)
 
    Pesos: normal e negrito. Cor: --foreground, sempre. Não existe "cinza para
@@ -43,12 +46,13 @@
    --foreground, e o painel (:root.admin) iguala --muted-foreground a
    --foreground.
 
-   Classe nova não inventa tamanho: usa uma das quatro variáveis. */
+   Classe nova não inventa tamanho: usa uma das cinco variáveis. */
 
 :root {
   --type-title: 48px;
   --type-heading: 24px;
   --type-body: 14px;
+  --type-tag: 12px;
   --type-label: 11px;
 }
 

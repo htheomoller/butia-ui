@@ -248,7 +248,7 @@
    "Canal" cell. Width/shrink are the app's job (add a utility). */
 .pill {
   display: inline-block;
-  font-size: var(--type-body);
+  font-size: var(--type-tag);
   font-weight: 500;
   line-height: 1.45;
   padding: 2px 8px;
@@ -678,7 +678,7 @@
    etiqueta muda de cor de uma tela para outra. */
 .tag {
   display: inline-block;
-  font-size: var(--type-body);
+  font-size: var(--type-tag);
   font-weight: 500;
   line-height: 1.45;
   padding: 2px 8px;
